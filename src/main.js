@@ -4,7 +4,6 @@ import VCalendar from 'v-calendar';
 import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import Page from "./schedule/Components/Page";
 import Modal from "./record/Components/Modal";
 import Form from "./record/Components/RegistrationForm";
 import store from "./store/index";
@@ -18,7 +17,6 @@ createApp(App)
     .use(store)
     .use(VueAxios, axios)
     .use(VCalendar, {})
-    .component('schedule-page', Page)
     .component('modal', Modal)
     .component('registration-form', Form)
     .mount('#app');

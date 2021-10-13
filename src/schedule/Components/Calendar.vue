@@ -60,7 +60,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['setModal', 'records']),
+    ...mapActions(['setModal', 'setRecords']),
     formatDates(dates) {
       return new Date(dates * 1000)
     },
@@ -78,7 +78,7 @@ export default {
     },
     scheduleClick: function (event) {
       let scheduleId = event.target.getAttribute('data-id');
-      this.records(scheduleId).then(() => {
+      this.setRecords(scheduleId).then(() => {
         this.setModal({
           scheduleId: scheduleId,
           active: true

@@ -12,10 +12,10 @@
         </div>
         <div class="modal-body">
           <div
-              v-if="this.getRecords[this.getModal.scheduleId]?.available > 0">
+              v-if="availableRecordsQuantity > 0">
             <registration-form></registration-form>
           </div>
-          <div v-if="this.getRecords[this.getModal.scheduleId]?.available === 0">
+          <div v-if="availableRecordsQuantity === 0">
             Sorry, there are no more places!
           </div>
         </div>
@@ -43,7 +43,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getModal', 'getRecords'])
+    ...mapGetters(['getModal', 'getRecords']),
+    availableRecordsQuantity() {
+      return this.getRecords[this.getModal.scheduleId]?.available
+    }
   },
   methods: {
     ...mapActions(['setModal']),

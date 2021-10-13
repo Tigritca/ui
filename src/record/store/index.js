@@ -20,7 +20,7 @@ const record = {
         }
     },
     actions: {
-        records(context, scheduleId) {
+        setRecords(context, scheduleId) {
             const getSchedulesRecordsUrl = 'http://localhost/api/schedule/' + scheduleId + '/records'
             return Axios.get(getSchedulesRecordsUrl)
                 .then((response) => {

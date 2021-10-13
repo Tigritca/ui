@@ -1,7 +1,7 @@
 <template>
   <div class="container-lg">
     <main class="">
-      <img alt="logo" src="../../assets/pngwing.com.png">
+      <img alt="logo" src="../assets/pngwing.com.png">
       <div class="calendar-wrapper">
         <Calendar></Calendar>
       </div>
@@ -10,17 +10,14 @@
   </div>
 </template>
 <script>
-import Calendar from "./Calendar";
-import {mapGetters, mapActions} from "vuex/dist/vuex.mjs";
-import Modal from "../../record/Components/Modal";
+import {mapActions} from "vuex/dist/vuex.mjs";
+import Calendar from "../schedule/Components/Calendar";
+import Modal from "../record/Components/Modal";
 
 export default {
   components: {
     Modal,
     Calendar
-  },
-  computed: {
-    ...mapGetters(['getModal'])
   },
   methods: {
     ...mapActions(['setSchedule']),
@@ -37,10 +34,6 @@ export default {
   created() {
     this.setSchedule(this.getCurrentWeekScopeTime());
   },
-  updated() {
-    console.log('page getModal.active', this.getModal.active)
-    this.setSchedule(this.getCurrentWeekScopeTime());
-  },
 }
 </script>
 <style scoped>
@@ -48,5 +41,10 @@ export default {
   max-width: 800px;
   width: 100%;
   margin: 0 auto;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 </style>
