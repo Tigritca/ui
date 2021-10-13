@@ -47,16 +47,15 @@ export default {
     ...mapGetters(['getSchedule', 'getRecords']),
     attributes: function () {
       let attributes = [];
-      for (let i = 0; i < this.getSchedule.length; i++) {
-        let item = this.getSchedule[i]
-        const dates = this.formatDates(this.getSchedule[i].dates)
-        item.dates = dates
-        item.customData.time = this.formatTime(dates)
-        item.customData.class = this.mapClassBySlug(item.slug)
-        attributes.push(item)
-      }
-
-      return attributes;
+      this.getSchedule.map((item, index) => {
+            const dates = this.formatDates(this.getSchedule[index].dates)
+            item.dates = dates
+            item.customData.time = this.formatTime(dates)
+            item.customData.class = this.mapClassBySlug(item.slug)
+            attributes.push(item)
+          }
+      )
+      return attributes
     }
   },
   methods: {

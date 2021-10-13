@@ -28,22 +28,23 @@
           </button>
         </div>
       </div>
-      <div class="col" v-if="records.length === index + 1">
-        <label class="form-label">Add record</label>
-        <div>
-          <button
-              @click="addRecord()"
-              type="button"
-              class="row-button" data-dismiss="modal">
-            <i class="bi bi-plus-square-fill"></i>
-          </button>
-        </div>
+    </div>
+    <div class="col" v-if="records.length < availableRecordsQuantity">
+      <label class="form-label">Add record</label>
+      <div>
+        <button
+            @click="addRecord()"
+            type="button"
+            class="row-button" data-dismiss="modal">
+          <i class="bi bi-plus-square-fill"></i>
+        </button>
       </div>
     </div>
   </form>
 </template>
 <script>
 import {mapGetters} from "vuex/dist/vuex.mjs";
+import record from '../../mixins/record'
 
 export default {
   data() {
@@ -58,8 +59,9 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getModal', 'getRecords'])
+    ...mapGetters(['getModal', 'getRecords']),
   },
+  mixins:[record],
   methods: {
     addRecord() {
       if (this.available === null) {

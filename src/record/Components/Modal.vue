@@ -34,6 +34,7 @@
 
 import {mapGetters, mapActions} from "vuex/dist/vuex.mjs";
 import RegistrationForm from './RegistrationForm'
+import record from "../../mixins/record";
 
 export default {
   components: {RegistrationForm},
@@ -44,10 +45,8 @@ export default {
   },
   computed: {
     ...mapGetters(['getModal', 'getRecords']),
-    availableRecordsQuantity() {
-      return this.getRecords[this.getModal.scheduleId]?.available
-    }
   },
+  mixins:[record],
   methods: {
     ...mapActions(['setModal']),
     hideModal() {
