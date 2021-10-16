@@ -40,11 +40,13 @@
         </button>
       </div>
     </div>
+    <button type="button" class="btn btn-primary" @click="save()">Save changes</button>
   </form>
 </template>
 <script>
 import {mapGetters} from "vuex/dist/vuex.mjs";
 import record from '../../mixins/record'
+import {mapActions} from "vuex";
 
 export default {
   data() {
@@ -61,8 +63,9 @@ export default {
   computed: {
     ...mapGetters(['getModal', 'getRecords']),
   },
-  mixins:[record],
+  mixins: [record],
   methods: {
+    ...mapActions(['createRecords']),
     addRecord() {
       if (this.available === null) {
         this.available = this.getRecords[this.getModal.scheduleId].available
@@ -78,6 +81,22 @@ export default {
       if (this.records.length > 1) {
         this.records.splice(index, 1)
       }
+    },
+    save() {
+      let scheduleId = this.getModal.scheduleId
+      let records = this.records
+      this.createRecords({scheduleId, records}).catch((error) => {
+        this.$toast(
+            error.message,
+            {
+              styles: {
+                backgroundColor: '#e53e3e',
+                color: '#fff'
+              }
+            }
+        );
+      });
+      //todo handle 422 and 500
     }
   },
 }
